@@ -1,0 +1,1 @@
+CC = Wall -WErroo extra -std=c++98
