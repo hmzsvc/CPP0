@@ -1,18 +1,16 @@
-#include <iostream>
-#include "phonebook.hpp"
+#include "PhoneBook.hpp"
 
 int main()
 {
     PhoneBook rehber;
     std::string command;
-
-    std::cout << "Kullanılabilir Komutlar: ADD, SEARCH, EXIT" << std::endl;
-
+    
     while (true)
     {
+        std::cout << "Kullanılabilir Komutlar: ADD, SEARCH, EXIT" << std::endl;
         std::cout << "> ";
         std::getline(std::cin, command);
-        if (std::cin.eof()) //ctrl+D basılırsa sonsuz döngüde kalmaması için
+        if (std::cin.eof())
         {
             std::cout << std::endl;
             break;

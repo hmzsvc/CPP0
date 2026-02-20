@@ -1,14 +1,12 @@
-#include <ctype.h>
-#include <iostream>
+#include "PhoneBook.hpp"
 #include <iomanip>
-#include "phonebook.hpp"
-#include "Contact.hpp"
 
 PhoneBook::PhoneBook()
 {
     _index = 0;
     _totalSaved = 0;
 }
+
 PhoneBook::~PhoneBook()
 {
 }
@@ -32,7 +30,7 @@ void    PhoneBook::searchContact()
 
     for (int i = 0; i < _totalSaved; i++)
     {
-        std::cout << "|" << std::setw(10) << i;
+        std::cout << "|" << std::setw(10) << i + 1;
         std::cout << "|" << std::setw(10) << formatString(_contacts[i].getFirstName());
         std::cout << "|" << std::setw(10) << formatString(_contacts[i].getLastName());
         std::cout << "|" << std::setw(10) << formatString(_contacts[i].getNickName());
@@ -41,9 +39,9 @@ void    PhoneBook::searchContact()
     std::string input;
     std::cout << "Gormek istediginiz kişinin index numarasini giriniz: ";
     std::getline(std::cin, input);
-    if (input.length() == 1 && input[0] >= '0' && input[0] <= '7')
+    if (input.length() == 1 && input[0] >= '1' && input[0] <= '8')
     {
-        int index = input[0] - '0';
+        int index = input[0] - '1';
         if (index < _totalSaved)
         {
             std::cout << "First Name     : " << _contacts[index].getFirstName() << std::endl;

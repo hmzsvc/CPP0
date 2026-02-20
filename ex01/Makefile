@@ -8,9 +8,10 @@ RM = rm -rf
 
 SRCS =	main.cpp\
 		Contact.cpp\
-		phonebook.cpp
+		PhoneBook.cpp
 
-OBJ = $(SRCS:.cpp=.o)
+OBJ_DIR = obj
+OBJ = $(SRCS:%.cpp=$(OBJ_DIR)/%.o)
 
 COLOR_YELLOW	=	\033[0;33m
 COLOR_GREEN		=	\033[0;32m
@@ -23,11 +24,14 @@ $(NAME)			:	$(OBJ)
 					@$(CC) $(CFLAGS) $(STD) $^ -o $(NAME)
 					@echo "\n\e[1m$(COLOR_YELLOW)$(NAME)	$(COLOR_GREEN)[is ready!]\e[0m\n$(COLOR_END)"
 
-%.o				:	%.cpp
+$(OBJ_DIR)/%.o	:	%.cpp | $(OBJ_DIR)
 					@$(CC) $(CFLAGS) $(STD) -c $< -o $@
 
+$(OBJ_DIR)		:
+					@mkdir -p $(OBJ_DIR)
+
 clean			:
-					@$(RM) -rf $(OBJ)
+					@$(RM) -rf $(OBJ_DIR)
 					@echo "\e[1m$(COLOR_YELLOW)objects		$(COLOR_RED)[are deleted!]\e[0m$(COLOR_END)"
 			
 
