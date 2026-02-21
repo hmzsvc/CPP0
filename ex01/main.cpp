@@ -2,12 +2,12 @@
 
 int main()
 {
-    PhoneBook rehber;
+    PhoneBook contactList;
     std::string command;
     
     while (true)
     {
-        std::cout << "Kullanılabilir Komutlar: ADD, SEARCH, EXIT" << std::endl;
+        std::cout << "USEFUL COMMANDS: ADD, SEARCH, EXIT" << std::endl;
         std::cout << "> ";
         std::getline(std::cin, command);
         if (std::cin.eof())
@@ -21,11 +21,11 @@ int main()
         }
         else if (command == "ADD")
         {
-            rehber.addContact();
+            contactList.addContact();
         }
         else if (command == "SEARCH")
         {
-            rehber.searchContact();
+            contactList.searchContact();
         }
     }
     return(0);

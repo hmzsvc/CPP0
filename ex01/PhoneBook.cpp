@@ -37,7 +37,7 @@ void    PhoneBook::searchContact()
         std::cout << "|" << std::endl;
     }
     std::string input;
-    std::cout << "Gormek istediginiz kişinin index numarasini giriniz: ";
+    std::cout << "please write index: ";
     std::getline(std::cin, input);
     if (input.length() == 1 && input[0] >= '1' && input[0] <= '8')
     {
@@ -51,17 +51,35 @@ void    PhoneBook::searchContact()
             std::cout << "Darkest Secret : " << _contacts[index].getSecret() << std::endl;
         }
         else
-            std::cout << "Hata: bu indexte kayitli kisi yok!" << std::endl;
+            std::cout << "ERROR: this index is not correct" << std::endl;
     }
     else
-        std::cout << "Hata: Gecersiz index girdiniz!" << std::endl;
+        std::cout << "ERROR: invalid index" << std::endl;
+}
+
+#include <string>
+
+std::string trim(const std::string& str) {
+    size_t first = str.find_first_not_of(" \t\n\r");
+    if (first == std::string::npos)
+        return ""; // Hepsi boşluksa boş string döndür
+    size_t last = str.find_last_not_of(" \t\n\r");
+    return str.substr(first, (last - first + 1));
 }
 
 void PhoneBook::addContact()
 {
     std::string input;
-    std::cout << "First_Name: ";
-    std::getline(std::cin, input);
+    while (true) {
+        std::cout << "First Name: ";
+        if (!std::getline(std::cin, input)) return;
+        
+        input = trim(input); // Veriyi hemen temizledik!
+        
+        if (!input.empty()) 
+            break;
+        std::cout << "Hata: Isim sadece bosluklardan olusamaz!" << std::endl;
+    }
     _contacts[_index].setFirstName(input);
     std::cout << "Last_Name: ";
     std::getline(std::cin, input);
@@ -72,7 +90,7 @@ void PhoneBook::addContact()
     std::cout << "Phone_Number: ";
     std::getline(std::cin, input);
     _contacts[_index].setPhoneNumber(input);
-    std::cout << "Dark_Secret: ";
+    std::cout << "Darkest_Secret: ";
     std::getline(std::cin, input);
     _contacts[_index].setSecret(input);
     _index = (_index + 1) % 8;
