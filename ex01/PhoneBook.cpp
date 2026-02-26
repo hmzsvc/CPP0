@@ -57,41 +57,90 @@ void    PhoneBook::searchContact()
         std::cout << "ERROR: invalid index" << std::endl;
 }
 
-#include <string>
+std::string trim(const std::string& str)
+{
+    int start = 0;
+    int end = str.length() - 1;
 
-std::string trim(const std::string& str) {
-    size_t first = str.find_first_not_of(" \t\n\r");
-    if (first == std::string::npos)
-        return ""; // Hepsi boşluksa boş string döndür
-    size_t last = str.find_last_not_of(" \t\n\r");
-    return str.substr(first, (last - first + 1));
+    while (str[start] && (str[start] == ' ' || str[start] == '\t' || str[start] == '\n'))
+        start++;
+
+    if (str[start] == '\0')
+        return ("");
+
+    while (end > start && (str[end] == ' ' || str[end] == '\t' || str[end] == '\n'))
+        end--;
+
+    return (str.substr(start, end - start + 1));
 }
 
 void PhoneBook::addContact()
 {
     std::string input;
-    while (true) {
+    while (true) 
+    {
         std::cout << "First Name: ";
-        if (!std::getline(std::cin, input)) return;
+        if (!std::getline(std::cin, input))
+            return;
         
-        input = trim(input); // Veriyi hemen temizledik!
+        input = trim(input);
         
         if (!input.empty()) 
             break;
-        std::cout << "Hata: Isim sadece bosluklardan olusamaz!" << std::endl;
+        std::cout << "Error: Name cannot consist only of spaces!" << std::endl;
     }
     _contacts[_index].setFirstName(input);
-    std::cout << "Last_Name: ";
-    std::getline(std::cin, input);
+    while (true) 
+    {
+        std::cout << "Last_Name: ";
+        if (!std::getline(std::cin, input))
+            return;
+        
+        input = trim(input);
+        
+        if (!input.empty()) 
+            break;
+        std::cout << "Error: Last_Name cannot consist solely of spaces!" << std::endl;
+    }
     _contacts[_index].setLastName(input);
-    std::cout << "Nickname: ";
-    std::getline(std::cin, input);
+    while (true) 
+    {
+        std::cout << "Nickname: ";
+        if (!std::getline(std::cin, input))
+            return;
+        
+        input = trim(input);
+        
+        if (!input.empty()) 
+            break;
+        std::cout << "Error: Nickname cannot consist solely of spaces!" << std::endl;
+    }
     _contacts[_index].setNickName(input);
-    std::cout << "Phone_Number: ";
-    std::getline(std::cin, input);
+    while (true) 
+    {
+        std::cout << "Phone_Number: ";
+        if (!std::getline(std::cin, input))
+            return;
+        
+        input = trim(input);
+        
+        if (!input.empty()) 
+            break;
+        std::cout << "Error: Phone_Number cannot consist solely of spaces!" << std::endl;
+    }
     _contacts[_index].setPhoneNumber(input);
-    std::cout << "Darkest_Secret: ";
-    std::getline(std::cin, input);
+    while (true) 
+    {
+        std::cout << "Darkest_Secret: ";
+        if (!std::getline(std::cin, input))
+            return;
+        
+        input = trim(input);
+        
+        if (!input.empty()) 
+            break;
+        std::cout << "Error: Darkest_Secret cannot consist solely of spaces!" << std::endl;
+    }
     _contacts[_index].setSecret(input);
     _index = (_index + 1) % 8;
     if (_totalSaved < 8)
